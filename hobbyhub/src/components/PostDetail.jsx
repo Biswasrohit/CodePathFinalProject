@@ -86,13 +86,26 @@ const PostDetail = () => {
   };
 
   const handleDeletePost = async () => {
-    const { error } = await supabase.from("posts").delete().eq("id", id);
+    const { error: commentsError } = await supabase
+      .from("comments")
+      .delete()
+      .eq("post_id", id);
 
-    if (error) {
-      console.error("Error deleting post:", error);
+    if (commentsError) {
+      console.error("Error deleting comments:", commentsError);
+      return;
+    }
+
+    const { error: postError } = await supabase
+      .from("posts")
+      .delete()
+      .eq("id", id);
+
+    if (postError) {
+      console.error("Error deleting post:", postError);
     } else {
       alert("Post deleted successfully");
-      navigate("/"); // Redirect to home page
+      navigate("/");
     }
   };
 

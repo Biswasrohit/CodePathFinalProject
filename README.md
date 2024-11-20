@@ -54,7 +54,7 @@ GIF created with [Kap](https://getkap.co/)
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+The comments table was linked to the posts table, causing issues when trying to delete a post. Solved this by deleting all the comments first, then removing the post.
 
 ## License
 
